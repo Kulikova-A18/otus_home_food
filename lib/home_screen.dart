@@ -5,6 +5,9 @@ const TextStyle textbuttonShow =
     TextStyle(color: textbuttonColor, fontSize: 15);
 const Color textbuttonColor = Color.fromRGBO(30, 89, 57, 0.965);
 
+const TextStyle unselectText =
+    TextStyle(color: unselectTextColor, fontSize: 70);
+
 const Color backgroundColor = Color.fromRGBO(255, 255, 255, 0.965);
 const Color iconColor = Color.fromRGBO(94, 110, 130, 10);
 
@@ -12,6 +15,7 @@ const TextStyle unselectTextName =
     TextStyle(color: unselectTextColor, fontSize: 35);
 const Color unselectTextColor = Colors.black;
 
+const TextStyle textbuttonSign = TextStyle(color: Colors.white, fontSize: 50);
 const Color greenColor = Color.fromRGBO(83, 222, 145, 0.965);
 
 const assets_1 = 'assets/1.png';
@@ -45,7 +49,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 // РЕЦЕПТЫ
-Widget _listView_menu() {
+Widget _listViewMenu() {
   final children = [
     Column(
       children: [
@@ -64,14 +68,14 @@ Widget _listView_menu() {
 }
 
 // ===========
-final sign_bool = false;
 
 TextEditingController loginController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 TextEditingController twopasswordController = TextEditingController();
 
 class _HomeScreenState extends State<HomeScreen> {
-  int a_len = 7;
+  bool sign_bool = false;
+
   void auth_void() {
     print(sign_bool);
     print(loginController.text);
@@ -81,26 +85,28 @@ class _HomeScreenState extends State<HomeScreen> {
     loginController.clear();
     passwordController.clear();
     twopasswordController.clear();
+
+    setState(() {
+      sign_bool = !sign_bool;
+    });
   }
 
   @override
   void initState() {
-    createLists_menu(1, assets_1, "Пончики", "60 минут");
-    createLists_menu(2, assets_2, "Домашние венские вафли", "10 минут");
-    createLists_menu(
+    createListsMenu(1, assets_1, "Пончики", "60 минут");
+    createListsMenu(2, assets_2, "Домашние венские вафли", "10 минут");
+    createListsMenu(
         3, assets_3, "Нежное печенье с шоколадной крошкой", "60 минут");
-    createLists_menu(4, assets_4, "Домашний бургер", "35 минут");
-    createLists_menu(5, assets_5, "Манты", "1 час 20 минут");
-    createLists_menu(
+    createListsMenu(4, assets_4, "Домашний бургер", "35 минут");
+    createListsMenu(5, assets_5, "Манты", "1 час 20 минут");
+    createListsMenu(
         6, assets_6, "Паста болоньезе классическая", "1 час 10 минут");
-    createLists_menu(7, assets_7, "Тонкие блины на молоке", "30 минут");
-
+    createListsMenu(7, assets_7, "Тонкие блины на молоке", "30 минут");
 
     super.initState();
   }
 
-  Card _create_newCard(
-      var _key, var _nameImage, var _titleName, var _titleTime) {
+  Card createNewCard(var _key, var _nameImage, var _titleName, var _titleTime) {
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
@@ -189,10 +195,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 
-  void createLists_menu(var _key, var _image, var _title, var _time) {
+  void createListsMenu(var _key, var _image, var _title, var _time) {
     var group = _GroupControllers();
 
-    var nameImagecard = _create_newCard(_key, _image, _title, _time);
+    var nameImagecard = createNewCard(_key, _image, _title, _time);
 
     setState(() {
       // List<Card>
@@ -247,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
-                    if(_selectedIndex == 0)
+                    if (_selectedIndex == 0)
                       Expanded(
                           child: SingleChildScrollView(
                               child: Container(
@@ -256,160 +262,331 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Column(
                               children: [
-                                for (var i = 0; i < _groupControllers.length; i++)
-                                   _name_imageCard[i]
-                                  //Text(i.toString())
+                                for (var i = 0;
+                                    i < _groupControllers.length;
+                                    i++)
+                                  _name_imageCard[i]
                               ],
                             ),
                           ],
-                        ),))),
-                      if(_selectedIndex == 1)
-                        (sign_bool == false)
-        ?
-        // --------- РЕГИСТРАЦИЯ ---------
-        Expanded(
-            child: SingleChildScrollView(
-                child: Container(
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-              children: [
-                Text(
-                  'HOME',
-                  style: unselectTextName,
-                ),
-                Text(
-                  'OTUS',
-                  style: unselectTextName,
-                ),
-                Text(
-                  'FOODS',
-                  style: unselectTextName,
-                ),SizedBox(height: 25,),
-                Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: TextField(
-                        controller: loginController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Логин',
                         ),
-                      ),
-                    ),SizedBox(height: 25,),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      child: TextField(
-                        obscureText: true,
-                        controller: passwordController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Пароль',
-                        ),
-                      ),
-                    ),SizedBox(height: 25,),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      child: TextField(
-                        obscureText: true,
-                        controller: twopasswordController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Пароль еще раз',
-                        ),
-                      ),
-                    ),SizedBox(height: 25,),
-                    Container(
-                        height: 50,
-                        width: 150,
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: ElevatedButton(
-                          child: const Text('Вход'),
-                          onPressed: () {
-                            // print(loginController.text);
-                            // print(passwordController.text);
-                          },
-                        )),
-                  ],
-                ),
-              ],
-            ),
-          )))
-        :
-        // --------- ВХОД ---------
-        Expanded(
-            child: SingleChildScrollView(
-                child: Container(
-            padding: const EdgeInsets.all(30.0),
-            child: Column(
-              children: [
-                Text(
-                  'HOME',
-                  style: unselectTextName,
-                ),
-                Text(
-                  'OTUS',
-                  style: unselectTextName,
-                ),
-                Text(
-                  'FOODS',
-                  style: unselectTextName,
-                ),SizedBox(height: 25,),
-                Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: TextField(
-                        controller: loginController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Логин',
-                        ),
-                      ),
-                    ),SizedBox(height: 25,),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                      child: TextField(
-                        obscureText: true,
-                        controller: passwordController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Пароль',
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 25,),
-                    Container(
-                        height: 50,
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: ElevatedButton(
-                          child: const Text('Вход'),
-                          onPressed: () {
-                            // print(loginController.text);
-                            // print(passwordController.text);
-                          },
-                        )),
-                  ],
-                ),
-              ],
-            ),
-          
-  
-                    ))),
+                      ))),
+                    if (_selectedIndex == 1)
+                      (sign_bool == false)
+                          ?
+                          // --------- РЕГИСТРАЦИЯ ---------
+                          Expanded(
+                              child: SingleChildScrollView(
+                                  child: Container(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    'HOME',
+                                    style: unselectText,
+                                  ),
+                                  const Text(
+                                    'OTUS',
+                                    style: unselectText,
+                                  ),
+                                  const Text(
+                                    'FOODS',
+                                    style: unselectText,
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.all(10),
+                                        child: TextField(
+                                            cursorColor: Colors.black,
+                                            controller: loginController,
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              disabledBorder:
+                                                  OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      borderSide: const BorderSide(
+                                                          color: Colors.black)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              hintText: 'Логин',
+                                            ),
+                                            style: const TextStyle(fontSize: 40)),
+                                      ),
+                                      const SizedBox(
+                                        height: 25,
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 10, 10, 0),
+                                        child: TextField(
+                                            cursorColor: Colors.black,
+                                            obscureText: true,
+                                            controller: passwordController,
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              disabledBorder:
+                                                  OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      borderSide: const BorderSide(
+                                                          color: Colors.black)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              hintText: 'Пароль',
+                                            ),
+                                            style: const TextStyle(fontSize: 40)),
+                                      ),
+                                      const SizedBox(
+                                        height: 25,
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 10, 10, 0),
+                                        child: TextField(
+                                            cursorColor: Colors.black,
+                                            obscureText: true,
+                                            controller: twopasswordController,
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              disabledBorder:
+                                                  OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      borderSide: const BorderSide(
+                                                          color: Colors.black)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              hintText: 'Пароль еще раз',
+                                            ),
+                                            style: const TextStyle(fontSize: 40)),
+                                      ),
+                                      const SizedBox(
+                                        height: 25,
+                                      ),
+                                      Container(
+                                          // height: 50,
+                                          // width: 150,
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30.0),
+                                              ),
+                                              backgroundColor:
+                                                  greenColor, // Background color
+                                            ),
+                                            child: const Text(
+                                              'Регистрация',
+                                              style: textbuttonSign,
+                                            ),
+                                            onPressed: () {
+                                              auth_void();
+                                            },
+                                          )),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )))
+                          :
+                          // --------- ВХОД ---------
+                          Expanded(
+                              child: SingleChildScrollView(
+                                  child: Container(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    'HOME',
+                                    style: unselectText,
+                                  ),
+                                  const Text(
+                                    'OTUS',
+                                    style: unselectText,
+                                  ),
+                                  const Text(
+                                    'FOODS',
+                                    style: unselectText,
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.all(10),
+                                        child: TextField(
+                                            cursorColor: Colors.black,
+                                            controller: loginController,
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              disabledBorder:
+                                                  OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .black)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              hintText: 'Логин',
+                                            ),
+                                            style: TextStyle(fontSize: 40)),
+                                      ),
+                                      const SizedBox(
+                                        height: 25,
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 10, 10, 0),
+                                        child: TextField(
+                                            cursorColor: Colors.black,
+                                            obscureText: true,
+                                            controller: passwordController,
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              disabledBorder:
+                                                  OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      borderSide:
+                                                          const BorderSide(
+                                                              color: Colors
+                                                                  .black)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black)),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              hintText: 'Пароль',
+                                            ),
+                                            style:
+                                                const TextStyle(fontSize: 40)),
+                                      ),
+                                      const SizedBox(
+                                        height: 25,
+                                      ),
+                                      Container(
+                                          // height: 50,
+                                          padding: const EdgeInsets.fromLTRB(
+                                              20, 0, 20, 0),
+                                          child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30.0),
+                                              ),
+                                              backgroundColor:
+                                                  greenColor, // Background color
+                                            ),
+                                            child: const Text(
+                                              'Вход',
+                                              style: textbuttonSign,
+                                            ),
+                                            onPressed: () {
+                                              auth_void();
+                                            },
+                                          )),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ))),
                   ],
                 ),
               ),
             ),
             bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
+              elevation: 0,
+              iconSize: 40,
+              selectedFontSize: 40,
+              unselectedFontSize: 25,
+              selectedIconTheme:
+                  const IconThemeData(color: Colors.amberAccent, size: 50),
+              selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+              unselectedIconTheme: const IconThemeData(
+                color: iconColor,
+              ),
+              unselectedItemColor: iconColor,
+              unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+              backgroundColor: Colors.white,
+              items:  <BottomNavigationBarItem>[
+                const BottomNavigationBarItem(
+                  backgroundColor: Colors.white,
                   icon: Icon(Icons.local_pizza),
                   label: 'Рецепты',
                 ),
                 BottomNavigationBarItem(
+                  backgroundColor: Colors.white,
                   icon: Icon(Icons.people),
-                  label: 'Вход',
-                ),
+                  label: (sign_bool == false)
+                          ? 'Регистрация' : 'Вход',
+                ) ,
               ],
               currentIndex: _selectedIndex,
               selectedItemColor: Colors.amber[800],
@@ -420,6 +597,6 @@ class _HomeScreenState extends State<HomeScreen> {
       }),
     );
 
-    throw UnimplementedError();
+    //throw UnimplementedError();
   }
 }

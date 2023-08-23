@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:otus_home_food/home_screen.dart';
 
 const TextStyle unselectText=
-    TextStyle(color: unselectTextColor, fontSize: 50);
+    TextStyle(color: unselectTextColor, fontSize: 70);
 const Color unselectTextColor = Colors.black;
 
 class SplashScreen extends StatefulWidget {
