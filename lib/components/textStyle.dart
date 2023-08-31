@@ -9,3 +9,10 @@ const TextStyle unselectText =
 
 const TextStyle unselectTextName =
     TextStyle(color: unselectTextColor, fontSize: 35);
+
+const TextStyle db_stepsTextName =
+    TextStyle(color: unselectTextColor, fontSize: 15);
+const TextStyle db_stepsNumTextName =
+    TextStyle(color: unselectTextColor, fontSize: 50);
+const TextStyle db_ingredientsTextName =
+    TextStyle(color: unselectTextColor, fontSize: 25);

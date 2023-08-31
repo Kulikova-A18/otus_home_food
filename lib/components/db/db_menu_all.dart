@@ -7,51 +7,51 @@ List<Food> _generateFoods() {
         title: "Пончики",
         time: 60,
         id: 1,
-        steps: List.empty(),
-        ingredients: List.empty(),
+        steps: _generate_donutsSteps(1),
+        ingredients: _generate_donutsIngredients(1),
         imgLocalSource: assets_donuts),
   );
   foods.add(Food(
       title: "Домашние венские вафли",
       time: 10,
       id: 2,
-      steps: List.empty(),
-      ingredients: List.empty(),
+      steps: _generate_wafflesSteps(2),
+      ingredients: _generate_wafflesIngredients(2),
       imgLocalSource: assets_vienneseWaffles));
   foods.add(Food(
       title: "Нежное печенье с шоколадной крошкой",
       time: 60,
       id: 3,
-      ingredients: List.empty(),
-      steps: List.empty(),
+      steps: _generate_cookiesSteps(3),
+      ingredients: _generate_cookiesIngredients(3),
       imgLocalSource: assets_delicateChocolateChipCookies));
   foods.add(Food(
       title: "Бургер",
       time: 35,
       id: 4,
-      steps: List.empty(),
-      ingredients: List.empty(),
+      steps: _generate_burgerSteps(4),
+      ingredients: _generate_burgerIngredients(4),
       imgLocalSource: assets_burger));
   foods.add(Food(
       title: "Манты",
       time: 80,
       id: 5,
-      ingredients: List.empty(),
-      steps: List.empty(),
+      steps: _generate_mantiSteps(5),
+      ingredients: _generate_mantiIngredients(5),
       imgLocalSource: assets_manti));
   foods.add(Food(
       title: "Паста болоньезе классическая",
       time: 70,
       id: 6,
-      ingredients: List.empty(),
-      steps: List.empty(),
+      steps: _generate_pastaBologneseSteps(6),
+      ingredients: _generate_pastaBologneseIngredients(6),
       imgLocalSource: "photo_six_recipe.png"));
   foods.add(Food(
       title: "Тонкие блины на молоке",
       time: 30,
       id: 7,
-      ingredients: List.empty(),
-      steps: List.empty(),
+      steps: _generate_pancakesSteps(7),
+      ingredients: _generate_pancakesIngredients(7),
       imgLocalSource: assets_thinPancakesWithMilk));
   return foods;
 }
