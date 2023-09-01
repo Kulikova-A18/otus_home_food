@@ -5,6 +5,24 @@ import 'package:otus_home_food/components/textStyle.dart';
 import 'package:otus_home_food/components/list_assets.dart';
 
 import 'package:otus_home_food/components/db/db_menu.dart';
+import 'package:otus_home_food/screens/about_recipe_screen.dart';
+part 'package:otus_home_food/components/db/db_menu_all.dart';
+
+part 'package:otus_home_food/components/db/steps/db_steps_burger.dart';
+part 'package:otus_home_food/components/db/steps/db_steps_cookies.dart';
+part 'package:otus_home_food/components/db/steps/db_steps_donuts.dart';
+part 'package:otus_home_food/components/db/steps/db_steps_manti.dart';
+part 'package:otus_home_food/components/db/steps/db_steps_pancakes.dart';
+part 'package:otus_home_food/components/db/steps/db_steps_pastaBolognese.dart';
+part 'package:otus_home_food/components/db/steps/db_steps_waffles.dart';
+
+part 'package:otus_home_food/components/db/ingredients/db_ingredients_burger.dart';
+part 'package:otus_home_food/components/db/ingredients/db_ingredients_cookies.dart';
+part 'package:otus_home_food/components/db/ingredients/db_ingredients_donuts.dart';
+part 'package:otus_home_food/components/db/ingredients/db_ingredients_manti.dart';
+part 'package:otus_home_food/components/db/ingredients/db_ingredients_pancakes.dart';
+part 'package:otus_home_food/components/db/ingredients/db_ingredients_pastaBolognese.dart';
+part 'package:otus_home_food/components/db/ingredients/db_ingredients_waffles.dart';
 
 const TextStyle textbuttonSign = TextStyle(color: Colors.white, fontSize: 50);
 
@@ -54,61 +72,6 @@ Widget _listViewMenu() {
 TextEditingController loginController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 TextEditingController twopasswordController = TextEditingController();
-List<Food> _generateFoods() {
-  List<Food> foods = [];
-  foods.add(
-    Food(
-        title: "Пончики",
-        time: 60,
-        id: 1,
-        steps: List.empty(),
-        ingredients: List.empty(),
-        imgLocalSource: assets_donuts),
-  );
-  foods.add(Food(
-      title: "Венские вафли",
-      time: 10,
-      id: 2,
-      steps: List.empty(),
-      ingredients: List.empty(),
-      imgLocalSource: assets_vienneseWaffles));
-  foods.add(Food(
-      title: "Печенье с шоколадной крошкой",
-      time: 60,
-      id: 3,
-      ingredients: List.empty(),
-      steps: List.empty(),
-      imgLocalSource: assets_delicateChocolateChipCookies));
-  foods.add(Food(
-      title: "Бургер",
-      time: 35,
-      id: 4,
-      steps: List.empty(),
-      ingredients: List.empty(),
-      imgLocalSource: assets_burger));
-  foods.add(Food(
-      title: "Манты",
-      time: 80,
-      id: 5,
-      ingredients: List.empty(),
-      steps: List.empty(),
-      imgLocalSource: assets_manti));
-  foods.add(Food(
-      title: "Паста болоньезе",
-      time: 70,
-      id: 6,
-      ingredients: List.empty(),
-      steps: List.empty(),
-      imgLocalSource: assets_pastaBolognese));
-  foods.add(Food(
-      title: "Блины на молоке",
-      time: 30,
-      id: 7,
-      ingredients: List.empty(),
-      steps: List.empty(),
-      imgLocalSource: assets_thinPancakesWithMilk));
-  return foods;
-}
 
 class _HomeScreenState extends State<HomeScreen> {
   bool sign_bool = false;
@@ -128,9 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  late List<Food> foods;
   @override
   void initState() {
-    List<Food> foods = _generateFoods();
+    foods = _generateFoods();
     for (int i = 0; i < foods.length; i++) {
       var food = foods[i];
       createListsMenu(i, food.getLocalPath(), food.title, food.getTimeValue());
@@ -212,6 +176,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               onPressed: () {
                                 print(_key);
+                                var food = foods[_key];
+                                runApp(AboutRecipeScreen(
+                                  food: food,
+                                ));
                               },
                               child: Text(
                                 'Смотреть рецепт',
@@ -267,6 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return SafeArea(
           child: Scaffold(
             appBar: AppBar(
+              toolbarHeight: MediaQuery.of(context).size.height / 10,
               title: Center(
                   child: Text(
                 (_selectedIndex == 0) ? "Рецепты" : "",

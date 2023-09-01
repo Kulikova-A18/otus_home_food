@@ -1,4 +1,4 @@
-part of 'package:otus_home_food/testexample.dart';
+part of 'package:otus_home_food/screens/home_screen.dart';
 
 List<FoodStep> _generate_pastaBologneseSteps(int foodId) {
   List<FoodStep> steps = [];

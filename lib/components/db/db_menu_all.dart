@@ -1,4 +1,4 @@
-part of 'package:otus_home_food/testexample.dart';
+part of 'package:otus_home_food/screens/home_screen.dart';
 
 List<Food> _generateFoods() {
   List<Food> foods = [];
@@ -45,7 +45,7 @@ List<Food> _generateFoods() {
       id: 6,
       steps: _generate_pastaBologneseSteps(6),
       ingredients: _generate_pastaBologneseIngredients(6),
-      imgLocalSource: "photo_six_recipe.png"));
+      imgLocalSource: assets_pastaBolognese));
   foods.add(Food(
       title: "Тонкие блины на молоке",
       time: 30,

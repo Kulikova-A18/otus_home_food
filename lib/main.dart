@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otus_home_food/screens/splash_screen.dart';
 
-import 'package:otus_home_food/testexample.dart';
+// import 'package:otus_home_food/testexample_dart';
 
 // Application launch
 void main() => runApp(MyApp());
@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         //
-        //home: SplashScreen()
-        home: Testexample()
+        home: SplashScreen()
+        //home: Testexample()
         //
         );
   }

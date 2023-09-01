@@ -1,4 +1,4 @@
-part of 'package:otus_home_food/testexample.dart';
+part of 'package:otus_home_food/screens/home_screen.dart';
 
 List<FoodIngredient> _generate_wafflesIngredients(int foodId) {
   List<FoodIngredient> ingredients = [];
